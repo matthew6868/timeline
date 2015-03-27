@@ -1,0 +1,51 @@
+How to build and use the ffmpeg in VS2012
+
+build steps:
+
+step 1)
+follow the offical website http://www.ffmpeg.org/platform.html#Linking-to-FFmpeg-with-Microsoft-Visual-C_002b_002b to download the corressponding packages.
+	1-a) ffmpeg(http://www.ffmpeg.org/)
+	1-b) c99-to-c89s(https://github.com/libav/c99-to-c89/)
+	1-c) yasm(http://yasm.tortall.net/)
+	1-d) msinttypes(http://code.google.com/p/msinttypes/)
+	1-e) zlib(http://zlib.net/)
+	1-f) msys2(http://msys2.github.io/)
+
+step 2)
+go to the msys folder and create a copy of msys.bat, rename to msys_vs2012.bat and add the following line [call "%VS110COMNTOOLS%vsvars32.bat"] to this batch file. Use "CL.exe" command to make sure we can found the MSVC CL.EXE command line correctly.
+
+step 3)
+run the msys_vs2012.bat from here.
+
+step 4)
+rename the msys link.exe to other name to avoid confict with MSVC link.exe, eg. "mv /bin/link /bin/msys_link.exe", use "which link.exe" to make sure the path is point to MSVC link. eg. "/c/Program Files (x86)/Microsoft Visual Studio 11.0/VC/Bin/link.exe"
+
+step 5)
+compile the zlib with MSVC by follow the instruction from http://www.ffmpeg.org/. After compiled successful, move zlib.lib, zconf.h and zlib.h to somewhere MSVC can see. eg. "/c/Program Files (x86)/Microsoft Visual Studio 11.0/VC/include" and "/c/Program Files (x86)/Microsoft Visual Studio 11.0/VC/lib"
+
+step 6) --- no more need for >= VS2013
+copy the "inttypes.h" and "stdint" from msinttypes to root folder of the ffmpeg source tree or to /home/user foler by using flag --extra-cflags=-I/home/<user>
+
+step 7) --- no more need for >= VS2013
+copy c99-to-c89 tools(c99conv.exe,c99wrap.exe) to /home/<user>
+
+step 8)
+copy yasm.exe to /home/<user>
+
+step 9)
+add the current user path to system PATH by command "export PATH=/home/<user>/:$PATH" and use "echo $PATH" to verity it.
+
+step 10)
+$cd /d/<ffmpeg-source-root-folder>
+$./configure --toolchain=msvc --enable-shared [--extra-cflags=-I/home/<user>/include --extra-ldflags=-L/home/<user>/lib]
+$make
+$make install
+
+
+
+
+reference:
+1)http://ffmpeg.zeranoe.com/forum/viewtopic.php?t=1309
+2)https://blogs.gnome.org/rbultje/2012/09/27/microsoft-visual-studio-support-in-ffmpeg-and-libav/
+3)http://ramu492.blogspot.com/2013/06/porting-ffmpeg-on-to-winodws7-and.html
+4)http://www.mjbshaw.com/2011/09/building-visual-studio-2010-project.html
