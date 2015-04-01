@@ -103,8 +103,8 @@ copy_to_output() (
   cp lib*/*.pdb output/bin/${arch}/${build}
   cp lib*/*.lib output/lib/${arch}/${build}
 
-  copy_binary
-  copy_headers
+  #copy_binary
+  #copy_headers
 )
 
 clean() (
@@ -156,8 +156,8 @@ configure() (
     --disable-doc                   \
     --arch=${arch}"
 
-  EXTRA_CFLAGS="-D_WIN32_WINNT=0x0601 -DWINVER=0x0601 -d2Zi+ -MD -O2"
-  EXTRA_LDFLAGS="-NODEFAULTLIB:libcmt"
+  EXTRA_CFLAGS="-D_WIN32_WINNT=0x0601 -DWINVER=0x0601 -d2Zi+ -MT -O2"
+  EXTRA_LDFLAGS="-NODEFAULTLIB:libc.lib -NODEFAULTLIB:msvcrt.lib -NODEFAULTLIB:libcd.lib -NODEFAULTLIB:libcmtd.lib -NODEFAULTLIB:msvcrtd.lib"
 
   sh configure --toolchain=msvc --extra-cflags="${EXTRA_CFLAGS}" --extra-ldflags="${EXTRA_LDFLAGS}" ${OPTIONS}
 )
