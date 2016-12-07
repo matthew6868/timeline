@@ -1,6 +1,6 @@
 ##CentOS 6.5 install PHP 7.0 + MySQL 5.7 + Apache 2.4 + Nginx
 
-1. ### Apache 2.4
+### Apache 2.4
 
 Ref: 
 ```
@@ -22,7 +22,7 @@ yun install httpd24
 ```
 NOTE: config files are in: /opt/rh/httpd24/root/etc/httpd
 
-2. ### MySQL 5.7
+### MySQL 5.7
 
 Ref: 
 ```
@@ -51,7 +51,7 @@ yum repolist enabled | grep mysql
 [xxx#] yum install mysql-community-server
 ```
 
-1. ### PHP 7.0
+### PHP 7.0
 Ref:
 ```
 http://www.tecmint.com/install-apache-mysql-php-on-redhat-centos-fedora/
@@ -95,7 +95,7 @@ $ ps aux | grep php-fpm
 ```$ vim /etc/opt/remi/php70/php.ini
 $ vim /etc/opt/remi/php70/php-fpm.d/www.conf
 ```
-4. ### Nginx
+### Nginx
 Ref:
 ```
 http://nginx.org/en/linux_packages.html#mainline
